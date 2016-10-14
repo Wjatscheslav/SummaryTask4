@@ -1,0 +1,19 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+	<fmt:setLocale value="${language}" />
+	<fmt:setBundle
+		basename="ua.nure.tarasenko.summary4.resources.resources" />
+	<table style="width: 100%; border: 0">
+		<tr>
+			<td><a href="/SummaryTask4/jsp/main_admin.jspx"><fmt:message
+						key="adminmenu.home" /></a></td>
+			<td><a href="/SummaryTask4/jsp/lock_user.jspx"><fmt:message
+						key="adminmenu.lock.user" /></a></td>
+			<td><a href="/SummaryTask4/jsp/lock_card.jspx"><fmt:message
+						key="adminmenu.lock.card" /></a></td>
+			<td><a href="/SummaryTask4/"><fmt:message
+						key="adminmenu.exit" /></a></td>
+		</tr>
+	</table>
+</jsp:root>

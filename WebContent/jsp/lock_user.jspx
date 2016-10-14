@@ -1,0 +1,37 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=Utf-8" />
+	<jsp:directive.page errorPage="/jsp/lock_error.jspx" />
+	<html>
+<head>
+<link type="text/css" rel="stylesheet" href="../css/index.css"></link>
+<jsp:directive.include file="../jspf/title.jspf" />
+<jsp:directive.include file="../jspf/admin_menu.jspf" />
+</head>
+<body>
+	<form name="lockUser" method="POST" action="../userLocker">
+		<p>
+			<label><fmt:message key="lock.user.name" /></label>
+		</p>
+		<p>
+			<input type="text" name="login" />
+		</p>
+		<p>
+			<input name="lock" type="radio" value="true" checked="true" />
+			<fmt:message key="lock.lock" />
+		</p>
+		<p>
+			<input name="lock" type="radio" value="false" />
+			<fmt:message key="lock.unlock" />
+		</p>
+		<c:set var="button_lock">
+			<fmt:message key="lock.button" />
+		</c:set>
+		<p>
+			<input type="submit" name="lock" value="${button_lock}" />
+		</p>
+	</form>
+</body>
+	</html>
+</jsp:root>

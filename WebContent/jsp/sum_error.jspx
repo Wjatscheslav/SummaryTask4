@@ -1,0 +1,20 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=Utf-8" />
+	<html>
+<head>
+<link type="text/css" rel="stylesheet" href="/css/index.css"></link>
+<jsp:directive.include file="/jspf/title.jspf" />
+<title>Error</title>
+</head>
+<body>
+	<h3>Error</h3>
+	<hr />
+	<jsp:expression>(request.getAttribute("errorMessage") != null) ? (String) request.getAttribute("errorMessage")
+					: "unknown error"</jsp:expression>
+	<hr />
+	<a href="/SummaryTask4/jsp/transfer_history.jspx">Return to
+		transfer history</a>
+</body>
+	</html>
+</jsp:root>

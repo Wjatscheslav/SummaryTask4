@@ -1,0 +1,26 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=Utf-8" />
+	<html>
+<head>
+<link type="text/css" rel="stylesheet" href="../css/index.css"></link>
+<jsp:directive.include file="../jspf/title.jspf" />
+<jsp:directive.include file="../jspf/admin_menu.jspf" />
+</head>
+<body>
+	<c:set var="locked">
+		<fmt:message key="lock.user.locked" />
+	</c:set>
+	<c:set var="unlocked">
+		<fmt:message key="lock.user.unlocked" />
+	</c:set>
+	<c:if test="${action = true}">
+		<c:out value="${locked} ${login_lock} " />
+	</c:if>
+	<c:if test="${action = false}">
+		<c:out value="${unlocked} ${login_lock} " />
+	</c:if>
+</body>
+	</html>
+</jsp:root>

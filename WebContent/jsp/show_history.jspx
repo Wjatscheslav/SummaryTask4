@@ -1,0 +1,91 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=Utf-8" />
+	<html>
+<head>
+<link type="text/css" rel="stylesheet" href="../css/index.css"></link>
+<jsp:directive.include file="../jspf/title.jspf" />
+<jsp:directive.include file="../jspf/main_menu.jspf" />
+</head>
+<body>
+	<c:if test="${param.account > 0}">
+		<c:set var="historyAccount" value="${param.account}" scope="session" />
+	</c:if>
+	<form name="sort" action="../paymentSort">
+		<c:set var="sortBy">
+			<fmt:message key="transfer.sortby" />
+		</c:set>
+
+		<p>
+			<c:out value="Account id" />
+		</p>
+		<input name="account" type="text" disabled="true"
+			value="${historyAccount}" />
+		<p>
+			<c:out value="${sortBy}" />
+		</p>
+		<p>
+			<input name="sorting" type="radio" value="PAYMENT_ID" checked="true" />
+			<fmt:message key="history.sortby.id" />
+			<input name="sorting" type="radio" value="OPERATION_DATE" />
+			<fmt:message key="history.sortby.date" />
+		</p>
+		<p>
+			<input name="ascdesc" type="radio" value="ASC" checked="true" />
+			<fmt:message key="history.sort.asc" />
+			<input name="ascdesc" type="radio" value="DESC" />
+			<fmt:message key="history.sort.desc" />
+		</p>
+		<c:set var="button">
+			<fmt:message key="history.button.confirm" />
+		</c:set>
+
+		<input type="submit" value="${button}" />
+	</form>
+	<jsp:useBean id="payment"
+		class="ua.nure.tarasenko.summary4.db.bean.PaymentBean" scope="session" />
+	<jsp:setProperty name="payment" property="accountId"
+		value="${historyAccount}" />
+	<c:set var="items" value="${payment.payments}" scope="session" />
+	<table border="1">
+		<tr>
+			<th><label><fmt:message key="history.payment.id" /></label></th>
+			<th><label><fmt:message key="history.date" /></label></th>
+			<th><label><fmt:message key="history.from_account" /></label></th>
+			<th><label><fmt:message key="history.to_account" /></label></th>
+			<th><label><fmt:message key="history.amount" /></label></th>
+		</tr>
+		<c:forEach var="item" items="${items}">
+			<tr>
+				<td>${item.paymentId}</td>
+				<td>${item.operationDate}</td>
+				<td>${item.sendAccount}</td>
+				<td>${item.receiveAccount}</td>
+				<td>${item.amount}</td>
+			</tr>
+		</c:forEach>
+	</table>
+	<b>Show send and receive amount</b>
+	<jsp:useBean id="account"
+		class="ua.nure.tarasenko.summary4.db.bean.AccountBean" scope="session" />
+	<jsp:setProperty name="account" property="clientId"
+		value="${sessionScope.id}" />
+	<c:set var="items" value="${account.accounts}" scope="session" />
+
+	<form name="sum" action="../sum">
+		<p>
+			<select name="accId">
+				<option disabled="true" selected="true">Choose account:</option>
+				<c:forEach var="acc" items="${items}">
+					<option value="${acc.accountId}">${acc.accountId}</option>
+				</c:forEach>
+			</select>
+		</p>
+		<p>
+			<input type="submit" value="Confirm" />
+		</p>
+	</form>
+</body>
+	</html>
+</jsp:root>

@@ -1,0 +1,24 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=Utf-8" />
+	<fmt:setLocale value="${language}" />
+	<fmt:setBundle
+		basename="ua.nure.tarasenko.summary4.resources.resources" />
+	<html>
+<head>
+<link type="text/css" rel="stylesheet" href="/css/index.css"></link>
+<title><fmt:message key="login.error.title" /></title>
+</head>
+<body>
+	<h3>
+		<fmt:message key="login.error.header" />
+	</h3>
+	<hr />
+	<jsp:expression>(request.getAttribute("errorMessage") != null) ? (String) request.getAttribute("errorMessage")
+					: "unknown error"</jsp:expression>
+	<hr />
+	<a href="/SummaryTask4/jsp/login.jspx">Return to login page</a>
+</body>
+	</html>
+</jsp:root>

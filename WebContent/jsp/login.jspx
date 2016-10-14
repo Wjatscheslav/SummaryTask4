@@ -1,0 +1,43 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=Utf-8" />
+	<jsp:directive.page errorPage="/jsp/login_error.jspx" />
+	<c:set var="language" value="${param.language}" scope="session" />
+	<fmt:setLocale value="${sessionScope.language}" />
+	<fmt:setBundle
+		basename="ua.nure.tarasenko.summary4.resources.resources" />
+	<html>
+<head>
+<link type="text/css" rel="stylesheet" href="../css/index.css"></link>
+<jsp:directive.include file="/jspf/title.jspf" />
+</head>
+<body>
+	<h3>
+		<fmt:message key="login.header" />
+	</h3>
+	<hr />
+	<form name="loginForm" method="POST" action="../controller">
+		<p>
+			<label><fmt:message key="login.label.user" /></label>
+		</p>
+		<p>
+			<input type="text" name="login" value="AntonioAntonio" />
+		</p>
+		<p>
+			<label><fmt:message key="login.label.pass" /></label>
+		</p>
+		<p>
+			<input type="password" name="password" value="AntonioAntonio" />
+		</p>
+		<c:set var="button_title">
+			<fmt:message key="login.button.submit" />
+		</c:set>
+		<p>
+			<input type="submit" value="${button_title}" />
+		</p>
+	</form>
+	<hr />
+</body>
+	</html>
+</jsp:root>

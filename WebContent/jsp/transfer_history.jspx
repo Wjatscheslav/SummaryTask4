@@ -1,0 +1,46 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=Utf-8" />
+	<jsp:directive.page errorPage="/jsp/transfer_error.jspx" />
+	<html>
+<head>
+<link type="text/css" rel="stylesheet" href="../css/index.css"></link>
+<jsp:directive.include file="../jspf/title.jspf" />
+<jsp:directive.include file="../jspf/main_menu.jspf" />
+</head>
+<body>
+	<jsp:useBean id="card"
+		class="ua.nure.tarasenko.summary4.db.bean.CreditCardBean"
+		scope="session" />
+	<jsp:setProperty name="card" property="clientId"
+		value="${sessionScope.id}" />
+	<c:set var="items" value="${card.cards}" scope="session" />
+	<form name="transferHistory" method="POST" action="show_history.jspx">
+		<p>
+			<label><fmt:message key="history.card" />: </label> <select
+				name="account">
+				<option disabled="true" selected="true"><fmt:message
+						key="history.choose" /></option>
+				<c:forEach var="credit_card" items="${items}">
+					<jsp:setProperty name="account" property="accountId"
+						value="${credit_card.accountId}" />
+					<c:set var="acc" value="${account.account}" scope="session" />
+					<c:set var="number">
+						<fmt:message key="history.label.number" />
+					</c:set>
+					<option value="${acc.accountId}">${acc.name} ${number}:
+						${credit_card.cardId}</option>
+				</c:forEach>
+			</select>
+		</p>
+		<c:set var="button_title">
+			<fmt:message key="history.button.confirm" />
+		</c:set>
+		<p>
+			<input type="submit" value="${button_title}" />
+		</p>
+	</form>
+</body>
+	</html>
+</jsp:root>
